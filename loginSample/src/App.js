@@ -219,7 +219,7 @@ console.log("INPUT TEXT " +a);
   focusPreviousField(index){
     console.log("Previosu field")
     if(index != 0){
-      self.inputArray[index - 1].focus();
+      this.inputs[index - 1].focus();
     }
   }
   //function to add TextInput dynamically
@@ -228,9 +228,14 @@ console.log("INPUT TEXT " +a);
     let textInput = this.state.textInput;
     // textInput.push(<TextInput style={styles.textInput} ref = {(input)=>this.addRef(input, index)}
     textInput.push(<TextInput style={styles.textInput} ref = {(input)=>this.inputs[index] = input}
-      onChangeText={(text) => this.addValues(text, index)} maxLength={1}
-        onkeypress={() => this.focusPreviousField(index)}
-      /> )
+      // onChangeText={(text) => this.addValues(text, index)} 
+      maxLength={1}
+        onKeyPress={({nativeEvent}) => {
+          nativeEvent.key === 'Backspace'
+            ? this.focusPreviousField(index)
+            : this.addValues(nativeEvent.value, index);
+        }}
+      />)
       // onChangeText={this.focusText} maxLength={1}/>);
     this.setState({ textInput });
 //     <TextInput
@@ -251,6 +256,8 @@ console.log("INPUT TEXT " +a);
 
   //function to add text from TextInputs into single array
   addValues = (text, index) => {
+    console.log(text);
+    
     let dataArray = this.state.inputData;
     let checkBool = false;
     if (dataArray.length !== 0){
@@ -265,6 +272,7 @@ console.log("INPUT TEXT " +a);
     this.setState({
       inputData: dataArray
     });
+    console.log(this.state.dataArray);
     // this.secondTextInput.focus();
   }
   else {
@@ -272,7 +280,11 @@ console.log("INPUT TEXT " +a);
     this.setState({
       inputData: dataArray
     });
+   
   }
+  // if(text == ''){
+  //   this.focusPreviousField(index);
+  // }
   console.log("index " +index);
   console.log("arr count " +this.state.inputArray.length);
   if(index != this.state.inputArray.length - 1){
