@@ -182,18 +182,47 @@ class HomeScreen extends Component {
       textInput: [],
       inputData: [],
       inputArray: [],
+      value: [],
+      result: '',
+      textInputValues: ["A", "B"],
+      texInputs: []
     }
     this.inputs = {};
 
   }
-componentWillMount(){
-  var array = [1,2,3, 4]
-  this.setState({inputArray:array})
+componentDidMount(){
+  var array = [1,2];
+    this.setState({inputArray: array});
+    
   var s = ["a", "b", "c", "d"]
+  let dict = {}
+  var arrs = []
+  var s = []
+  this.setState({result: 'P'})
   for (let i = 0; i< array.length; i++){
+    // this.inputArray.push[''];
+    dict[i] = 'A';
+    // s.push('');
     this.addTextInput(i)
-  }
   
+  
+  }
+  this.setState({texInputs: array});
+  arrs.push(dict);
+  // this.setState({
+  //   value: arrs,
+  // })
+  console.log("arrs ", arrs);
+  let result = arrs.map((sum) =>{
+    let s = sum[0]
+    console.log('SBBS ', s);
+    return s;
+  })
+  let a = 'NN'
+  
+  
+  console.log("aresultrrs ", result);
+
 }
 
 
@@ -221,9 +250,37 @@ console.log("INPUT TEXT " +a);
   }
   focusPreviousField(index){
     console.log("Previosu field")
+    console.log('Previuos field array ', dataArray);
+    let dataArray = this.state.inputData;
+    
+  //  this.setState({
+  //    value[index] : "HH"
+  //  })
+    if (dataArray.length !== 0){
+      dataArray.forEach(element => {
+        console.log(element);
+        if (element.index === index ){
+         
+          // element.text = text;
+          // checkBool = true;
+        
+      dataArray.splice(index,1)
+      console.log('remove field array ', this.state.inputData);
+        }
+      });
+      this.setState({
+        inputData: dataArray
+      });
+    
+      
+    }
     if(index != 0){
       this.inputs[index - 1].focus();
     }
+  }
+  setTextInputValue(){
+    let textInputValues = [...this.state.textInputValues];
+    
   }
   //function to add TextInput dynamically
   addTextInput = (index) => {
@@ -231,15 +288,31 @@ console.log("INPUT TEXT " +a);
     let textInput = this.state.textInput;
     // textInput.push(<TextInput style={styles.textInput} ref = {(input)=>this.addRef(input, index)}
     textInput.push(<TextInput style={styles.textInput} ref = {(input)=>this.inputs[index] = input}
-      // onChangeText={(text) => this.addValues(text, index)} 
+    key={index}
+      // onChangeText={(text) => this.setState({
+      //   value : text.replace(/\s/g, "")
+      // })} 
+      // value = {this.state.value}
+        // value={this.state.valuesTextInput[index]}
+      // value = {this.state.value.map((result) => {
+      //     return 'A';
+      // })}
+      // value = 'A'
+      // value={this.state.result}
+   
+      autoCorrect={false}
       maxLength={1}
+      value = {this.state.inputArray[index]}
+    
+      // onChangeText ={(s) => this.setState({result: text})}
         onKeyPress={({nativeEvent}) => {
           nativeEvent.key === 'Backspace'
             ? this.focusPreviousField(index)
-            : this.addValues(nativeEvent.value, index);
+            : this.addValues(nativeEvent.key, index);
         }}
-      />)
-      // onChangeText={this.focusText} maxLength={1}/>);
+      />
+      )
+      // onChangeText={this.focusText});
     this.setState({ textInput });
 
   }
@@ -249,14 +322,26 @@ console.log("INPUT TEXT " +a);
   //function to add text from TextInputs into single array
   addValues = (text, index) => {
     console.log(text);
-    
+    let name = text.replace(/\s/g, '');
+     this.inputs[0].value = "R";
+console.log("value ", this.inputs[0].value);
+    this.setState({
+      value: text,
+  });
+  this.setState(
+    {
+      result: text.replace(/\s/g, ''),
+      
+  });
     let dataArray = this.state.inputData;
     let checkBool = false;
     if (dataArray.length !== 0){
       dataArray.forEach(element => {
+        console.log("element ",element);
         if (element.index === index ){
-          element.text = text;
+          element.text = text
           checkBool = true;
+
         }
       });
     }
@@ -268,9 +353,17 @@ console.log("INPUT TEXT " +a);
     // this.secondTextInput.focus();
   }
   else {
+
+    if (text == ' '){
+      text = ''
+    }
+    
     dataArray.push({'text':text,'index':index});
+    
     this.setState({
-      inputData: dataArray
+      inputData: dataArray,
+      valuesTextInput: dataArray,
+      
     });
    
   }
@@ -279,24 +372,28 @@ console.log("INPUT TEXT " +a);
   // }
   console.log("index " +index);
   console.log("arr count " +this.state.inputArray.length);
+
   if(index != this.state.inputArray.length - 1){
     this.inputs[index + 1].focus()
   }
   // this.inputs[index].focus();
-  console.log("Log " +this.inputs);
+  console.log("Log " +this.state.inputData);
 
   }
 
   //function to console the output
   getValues = () => {
-    console.log('Data', this.state.inputData);
+    console.log("pp")
+    let dataA = this.state.inputData;
+    console.log('Data ', dataA);
   }
 
 
   render(){
+    this.getValues();
     return (
       <View style={{
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
         flex:1,
         // alignContent: 'center',
         // justifyContent: 'center',
@@ -319,6 +416,26 @@ console.log("INPUT TEXT " +a);
           // width: 300
         
         }}>
+   
+{/* <TextInput style={styles.textInput} 
+      // onChangeText={(text) => this.setState({
+      //   value : text.replace(/\s/g, "")
+      // })} 
+      // value = {this.state.value}
+        
+      // value = {this.state.value.map((result) => {
+      //     return 'A';
+      // })}
+      // value = 'A'
+      value={ this.han}
+   
+      autoCorrect={false}
+      maxLength={1}
+    
+      onChangeText ={(s) => this.setState({result: 'N'})}
+        
+      /> */}
+
         {this.state.textInput.map((value) => {
           return value
         })}
@@ -333,10 +450,21 @@ console.log("INPUT TEXT " +a);
     ref={(input) => { this.secondTextInput = input; }}
     placeholder="secondTextInput"
 /> */}
+
+
         </View>
+        <Button title="Add" onPress={this.getValues} />
         {/* <Button title='Get Values' onPress={() => this.getValues()} /> */}
       </View>
     )
+  }
+  han = () => {
+    console.log("KKKk")
+  //  let n =  this.state.value.map((result) => {
+  //     return 'A';
+  // })
+  return 'A';
+ 
   }
 }
 
@@ -372,7 +500,7 @@ row:{
   },
 });
 
-// export default HomeScreen;
+export default HomeScreen;
   
   const Stack = createStackNavigator();
   
@@ -387,4 +515,4 @@ row:{
       </NavigationContainer>
     );
   }
-export default App;
+// export default App;
