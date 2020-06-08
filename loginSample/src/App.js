@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, FlatList, TextInput, ListView, StyleSheet, Button} from 'react-native';
+import {View, Text, FlatList, TextInput, ListView, StyleSheet, Button, NativeModules} from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './Components/LoginForm';
 // import Button from './Components/Common/Button';
@@ -8,7 +8,10 @@ import DetailScreen from './Components/DetailScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Input from './Components/Common/Input';
-import ImagePicker from './Components/ImagePicker';
+import ImagePickers from './Components/ImagePickers';
+// if (__DEV__) {
+//   NativeModules.DevSettings.setIsDebuggingRemotely(true);
+// }
 
 // class App extends Component {
 //     state = {
@@ -238,18 +241,7 @@ console.log("INPUT TEXT " +a);
       />)
       // onChangeText={this.focusText} maxLength={1}/>);
     this.setState({ textInput });
-//     <TextInput
-//     placeholder="FirstTextInput"
-//     returnKeyType="next"
-//     onSubmitEditing={() => { this.secondTextInput.focus(); }}
-//     blurOnSubmit={false}
-// />
 
-// <TextInput
-//     ref={(input) => { this.secondTextInput = input; }}
-//     placeholder="secondTextInput"
-  
-// />
   }
 
   
@@ -380,19 +372,19 @@ row:{
   },
 });
 
-export default HomeScreen;
+// export default HomeScreen;
   
   const Stack = createStackNavigator();
   
   function App() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ImagePicker">
+        <Stack.Navigator initialRouteName="ImagePickers">
           {/* <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Details" component={DetailScreen}></Stack.Screen> */}
-          <Stack.Screen name="ImagePicker" component={ImagePicker}></Stack.Screen>
+          <Stack.Screen name="ImagePickers" component={ImagePickers} />
         </Stack.Navigator>
       </NavigationContainer>
     );
   }
-// export default App;
+export default App;
