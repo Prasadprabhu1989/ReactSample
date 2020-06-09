@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, FlatList, TextInput, ListView, StyleSheet, Button, NativeModules} from 'react-native';
+import {View, Text, FlatList, TextInput, ListView, StyleSheet, Button, NativeModules, AsyncStorage} from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './Components/LoginForm';
 // import Button from './Components/Common/Button';
@@ -8,7 +8,9 @@ import DetailScreen from './Components/DetailScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Input from './Components/Common/Input';
+import SampleView from './Components/SampleView';
 import ImagePickers from './Components/ImagePickers';
+import SplashScreen from 'react-native-splash-screen';
 // if (__DEV__) {
 //   NativeModules.DevSettings.setIsDebuggingRemotely(true);
 // }
@@ -92,8 +94,7 @@ import ImagePickers from './Components/ImagePickers';
 //         );
 //     }
 // }
-
-export default class HomeScreen extends Component{
+ class HomeScreen extends Component{
 
 
   state = {
@@ -424,370 +425,6 @@ export default class HomeScreen extends Component{
 
    
   }
-// class HomeScreen extends Component {
-
-//   constructor(props){
-//     super(props);
-//     this.state = {
-//       textInput: [],
-//       inputData: [],
-//       inputArray: [],
-//       value: [],
-//       result: '',
-//       textInputValues: [],
-//       texInputs: [1],
-//     }
-//     this.inputs = {};
-
-//   }
-// componentDidMount(){
-//   var array = [1,2, 3];
-//     this.setState({inputArray: array});
-    
-//   var s = ["a", "b", "c", "d"]
-//   let dict = {}
-//   var arrs = []
-//   var s = []
-//   this.setState({result: 'P'})
-//   for (let i = 0; i< array.length; i++){
-//     // this.inputArray.push[''];
-//     dict[i] = 'A';
-//     // s.push('');
-//     // arr.push(i)
-//     // this.addTextInput(i)
-
-  
-  
-//   }
-  
-//   this.setState({texInputs: array});
-  
-  
-//   let textInputss = [...this.state.texInputs];
-//   console.log("TextInputsssss ",textInputss);
-  
-//   this.setTextInputValue();
-//   // arrs.push(dict);
-//   // // this.setState({
-//   // //   value: arrs,
-//   // // })
-//   // console.log("arrs ", arrs);
-//   // let result = arrs.map((sum) =>{
-//   //   let s = sum[0]
-//   //   console.log('SBBS ', s);
-//   //   return s;
-//   // })
-//   // let a = 'NN'
-  
-  
-//   // console.log("aresultrrs ", result);
-
-// }
-
-
-// addRef(inpu, index){
-// let a = `TextField${index}`;
-// this.inputs[index] = inpu
-// console.log(a);
-// a = inpu;
-// console.log("INPUT TEXT " +a);
-// // return a
-// }
-// // addRef(index){
-// //   let a = `TextField${index}`;
-// //   console.log(a);
-// //   // a = inpu;
-// //   console.log("INPUT TEXT " +a);
-// //   return a
-// //   }
-
-
-//   focusText(index){
-//     index = 2;
-//     let a = `TextField${index}`;
-//     a.focus();
-//   }
-//   focusPreviousField(index){
-//     console.log("Previosu field")
-//     console.log('Previuos field array ', dataArray);
-//     let dataArray = this.state.inputData;
-    
-//   //  this.setState({
-//   //    value[index] : "HH"
-//   //  })
-//     if (dataArray.length !== 0){
-//       dataArray.forEach(element => {
-//         console.log(element);
-//         if (element.index === index ){
-         
-//           // element.text = text;
-//           // checkBool = true;
-        
-//       dataArray.splice(index,1)
-//       console.log('remove field array ', this.state.inputData);
-//         }
-//       });
-//       this.setState({
-//         inputData: dataArray
-//       });
-    
-      
-//     }
-//     if(index != 0){
-//       this.inputs[index - 1].focus();
-//     }
-//   }
-//   setTextInputValue(){
-//     let textInputValues = [...this.state.textInputValues];
-//   console.log("setTextInputValue");
-//   let textInputss = this.state.texInputs;
-//   console.log("TextInputs ",textInputss);
-//      this.state.texInputs.map((value) => {
-   
-//       textInputValues = [...textInputValues, ''];
-//       this.setState({textInputValues}, () => {
-//           this.prepareTextBox();
-//       })
-//     })
-    
-//   }
-//   prepareTextBox() {
-//     console.log("prepareTextBox");
-// let textInput = [...this.state.textInput];
-// this.state.texInputs.map((value, index) => {
-//   textInput.push(<TextInput style={styles.textInput} ref = {(input)=>this.inputs[index] = input}
-//       key={index}
-
-//     autoCorrect={false}
-//     maxLength={1} 
-//     value = {this.state.inputArray[index]}
-//     // value = {this.state.result}
-  
-//     // onChangeText ={(s) => this.setState({result: text})}
-//       onKeyPress={({nativeEvent}) => {
-//         nativeEvent.key === 'Backspace'
-//           ? this.focusPreviousField(index)
-//           : this.addValues(nativeEvent.key, index);
-//       }}
-//     />
-//     )
-//   })
-//     // onChangeText={this.focusText});
-//   this.setState({ textInput });
-
-
-//   }
-//   //function to add TextInput dynamically
-//   addTextInput = (index) => {
-
-//     let textInput = this.state.textInput;
-//     // textInput.push(<TextInput style={styles.textInput} ref = {(input)=>this.addRef(input, index)}
-//     textInput.push(<TextInput style={styles.textInput} ref = {(input)=>this.inputs[index] = input}
-//     key={index}
-//       // onChangeText={(text) => this.setState({
-//       //   value : text.replace(/\s/g, "")
-//       // })} 
-//       // value = {this.state.value}
-//         // value={this.state.valuesTextInput[index]}
-//       // value = {this.state.value.map((result) => {
-//       //     return 'A';
-//       // })}
-//       // value = 'A'
-//       // value={this.state.result}
-   
-//       autoCorrect={false}
-//       maxLength={1}
-//       value = {this.state.inputArray[index]}
-    
-//       // onChangeText ={(s) => this.setState({result: text})}
-//         onKeyPress={({nativeEvent}) => {
-//           nativeEvent.key === 'Backspace'
-//             ? this.focusPreviousField(index)
-//             : this.addValues(nativeEvent.key, index);
-//         }}
-//       />
-//       )
-//       // onChangeText={this.focusText});
-//     this.setState({ textInput });
-
-//   }
-
-  
-
-//   //function to add text from TextInputs into single array
-//   addValues = (text, index) => {
-//     console.log(text);
-//     let name = text.replace(/\s/g, '');
-//      this.inputs[0].value = "R";
-// console.log("value ", this.inputs[0].value);
-//     this.setState({
-//       value: text,
-//   });
-//   this.setState(
-//     {
-//       result: text.replace(/\s/g, ''),
-      
-//   });
-//     let dataArray = this.state.inputData;
-//     let checkBool = false;
-//     if (dataArray.length !== 0){
-//       dataArray.forEach(element => {
-//         console.log("element ",element);
-//         if (element.index === index ){
-//           element.text = text
-//           checkBool = true;
-
-//         }
-//       });
-//     }
-//     if (checkBool){
-//     this.setState({
-//       inputData: dataArray
-//     });
-    
-//     console.log(this.state.dataArray);
-//     // this.secondTextInput.focus();
-//   }
-
-//   else {
-
-//     //  if(text == ' '){
-//     //   text = ''
-//     // }
-//     text = text.replace(/\s/g, '')
-//     dataArray.push({'text':text,'index':index});
-//     var arr = []
-//     // dataArray.map((text, index) => {
-//     //   arr.push(text);
-//     // })
-//     for (var i = 0, l = dataArray.length; i < l; i++) {
-//       var obj = dataArray[i];
-//       arr.push(obj.text);
-//       // ...
-//   }
-    
-//     console.log("arrnssn ", arr);
-//     // this.setState({
-//     //   inputData: dataArray,
-//     //   inputArray: arr,
-//     //   textInput: []
-      
-//     // },() =>{
-//     //   this.prepareTextBox();
-//     // });
-//     this.setState({
-//       inputData: dataArray,
-//       inputArray: arr,
-//       textInput: []
-      
-//     },() =>{
-//       this.prepareTextBox();
-//     });
-
-    
-   
-//   }
-//   // if(text == ''){
-//   //   this.focusPreviousField(index);
-//   // } https://www.google.com/search?ei=ExHeXoDFCfeC4-EPu7uW6A0&q=main+value+state+for+dynamically+created+textinput&oq=main+value+state+for+dynamically+created+textinput&gs_lcp=CgZwc3ktYWIQAzoECAAQR1C42whYsfQIYO73CGgAcAR4AIABmQGIAd4KkgEEMC4xMZgBAKABAaoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwjAmqrA__HpAhV3wTgGHbudBd0Q4dUDCAw&uact=5
-//   console.log("index " +index);
-//   console.log("arr count " +this.state.inputArray.length);
-
-//   if(index != this.state.inputArray.length - 1){
-//     this.inputs[2].focus()
-//   }
-//   // this.inputs[index].focus();
-//   console.log("Log " +this.state.inputData);
-
-//   }
-
-//   //function to console the output
-//   getValues = () => {
-//     console.log("Render")
-//     let dataA = this.state.inputData;
-//     console.log('Data ', dataA);
-//   }
-
-
-//   render(){
-//     this.getValues();
-//     return (
-//       <View style={{
-//         // backgroundColor: 'green',
-//         flex:1,
-//         // alignContent: 'center',
-//         // justifyContent: 'center',
-        
-//       }}>
-        
-//         <View style={{
-//           // flex:1,
-//           flexDirection:'row',
-//           backgroundColor: 'red',
-//           // width: 1000,
-//           // flex:1,
-//           height: 50,
-//           // alignSelf:'stretch',
-//           justifyContent: 'space-around',
-//           margin: 30,
-//           // top: 100
-
-//           // alignContent
-//           // width: 300
-        
-//         }}>
-   
-// {/* <TextInput style={styles.textInput} 
-//       // onChangeText={(text) => this.setState({
-//       //   value : text.replace(/\s/g, "")
-//       // })} 
-//       // value = {this.state.value}
-        
-//       // value = {this.state.value.map((result) => {
-//       //     return 'A';
-//       // })}
-//       // value = 'A'
-//       value={ this.han}
-   
-//       autoCorrect={false}
-//       maxLength={1}
-    
-//       onChangeText ={(s) => this.setState({result: 'N'})}
-        
-//       /> */}
-
-//         {/* {this.state.textInput.map((value) => {
-//           return value
-//         })} */}
-//         {this.state.textInput}
-//         {/* <TextInput
-//     placeholder="FirstTextInput"
-//     returnKeyType="next"
-//     onSubmitEditing={() => { this.secondTextInput.focus(); }}
-//     blurOnSubmit={false}
-// />
-
-// <TextInput
-//     ref={(input) => { this.secondTextInput = input; }}
-//     placeholder="secondTextInput"
-// /> */}
-
-
-//         </View>
-//         <Button title="Add" onPress={this.getValues} />
-//         {/* <Button title='Get Values' onPress={() => this.getValues()} /> */}
-//       </View>
-//     )
-//   }
-//   han = () => {
-//     console.log("KKKk")
-//   //  let n =  this.state.value.map((result) => {
-//   //     return 'A';
-//   // })
-//   return 'A';
- 
-//   }
-// }
 
 const styles = StyleSheet.create({
   container: {
@@ -824,16 +461,168 @@ row:{
 // export default HomeScreen;
   
   const Stack = createStackNavigator();
+ 
+  class App extends Component {
+    state = {
+      isSignIn: false
+    }
+    ch() {
+      try {
+        const value =  AsyncStorage.getItem('SignIn');
+        if (value !== null){
+          // We have data!!
+          console.log("ddvn", value);
+        }
+      } catch (error) {
+        // Error retrieving data
+      }
+    }
+    componentWillMount(){
+    SplashScreen.hide();
+    this.ch();
+    let s = AsyncStorage.getItem('SignIn');
+    console.log("sss ",s);
+    // this.checkSignIn().then((res) =>{
+    //   this.setState({
+    //     isSignin : res
+    //   })
+    // });
+
+    this.checkSignIn().then((res) =>
+      this.setState({
+      isSignIn: res
+    })
   
-  function App() {
+    )
+    // console.log('After FUnc:', {isSignin: isSigning});
+   
+    
+
+
+    }
+
+    // showScreen(checkSign){
+    //   if(checkSignIn){
+    //     return(
+    //     <NavigationContainer>
+      
+    //     <Stack.Navigator initialRouteName="SampleView">
+    //       {/* <Stack.Screen name="Home" component={HomeScreen} />
+    //       <Stack.Screen name="Details" component={DetailScreen}></Stack.Screen> */}
+    //       <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen>
+    //       <Stack.Screen name="ImagePickers" component={ImagePickers} />
+    //     </Stack.Navigator>
+    //   </NavigationContainer>
+    //     )
+    //   }
+    //   else{
+    //     return(
+    //       <NavigationContainer>
+        
+    //       <Stack.Navigator initialRouteName="ImagePickers">
+    //         {/* <Stack.Screen name="Home" component={HomeScreen} />
+    //         <Stack.Screen name="Details" component={DetailScreen}></Stack.Screen> */}
+    //         <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen>
+    //         <Stack.Screen name="ImagePickers" component={ImagePickers} />
+    //       </Stack.Navigator>
+    //     </NavigationContainer>
+    //     )
+    //   }
+    // }
+render(){
+  // this.showScreen(this.state.isSignIn)
+  console.log("render");
     return (
+      // this.state.isSignIn == true ? <LoginForm></LoginForm> : <ImagePickers></ImagePickers>
+
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ImagePickers">
+      <Stack.Navigator> 
+      {this.state.isSignIn == true ?
+
+        (
+          <>
+          <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen>
+          {/* <Stack.Screen name = "LoginForm" component={LoginForm}></Stack.Screen> */}
+          </>
+        
+        )
+        
+        :
+        ( 
+          <>
+          <Stack.Screen name="ImagePickers" component={ImagePickers} /> 
+          {/* <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen>
+          <Stack.Screen name = "LoginForm" component={LoginForm}></Stack.Screen> */}
+
+          </>
+          
+        )
+      }
+      <Stack.Screen name = "LoginForm" component={LoginForm}></Stack.Screen>
+      {/* <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen>
+          <Stack.Screen name = "LoginForm" component={LoginForm}></Stack.Screen> */}
+         
+
+         </Stack.Navigator>
+    {/* {this.state.isSignIn == false ?  */}
+        {/* <Stack.Navigator initialRouteName="SampleView"> */}
           {/* <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Details" component={DetailScreen}></Stack.Screen> */}
-          <Stack.Screen name="ImagePickers" component={ImagePickers} />
-        </Stack.Navigator>
-      </NavigationContainer>
+          {/* <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen> */}
+          {/* <Stack.Screen name="ImagePickers" component={ImagePickers} /> */}
+        {/* </Stack.Navigator> : */}
+        {/* <Stack.Navigator initialRouteName="ImagePickers"> */}
+          {/* <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Details" component={DetailScreen}></Stack.Screen> */}
+          {/* <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen> */}
+          {/* <Stack.Screen name="ImagePickers" component={ImagePickers} /> */}
+
+        {/* </Stack.Navigator> */}
+      {/* } */}
+      
+       </NavigationContainer>
+
     );
+    
+ }
+
+        //  checkSignIn = async () => {
+        //   let userId = '';
+        //   try {
+        //     userId = await AsyncStorage.getItem('SignIn');
+        //   } catch (error) {
+        //     // Error retrieving data
+        //     console.log(error.message);
+        //   }
+        //   console.log(userId);
+          
+        //   return userId;
+        // }
+
+        checkSignIn = () => {
+          return new Promise((resolve, reject) => {
+          // let userId = '';
+          // try {
+          //   userId = await AsyncStorage.getItem('SignIn');
+          // } catch (error) {
+          //   // Error retrieving data
+          //   console.log(error.message);
+          // }
+          // console.log(userId);
+          AsyncStorage.getItem('SignIn')
+          .then(res =>{
+            if (res !== null) {
+              resolve(true);
+            } else {
+              resolve(false);
+            }
+          })
+          .catch(error => reject(error))
+          
+        })
+      }
   }
-// export default App;
+  // function checkSignIn(){
+
+  // }
+export default App;
