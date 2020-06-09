@@ -11,6 +11,7 @@ import Input from './Components/Common/Input';
 import SampleView from './Components/SampleView';
 import ImagePickers from './Components/ImagePickers';
 import SplashScreen from 'react-native-splash-screen';
+import DuplicateItem from './Components/DuplicateItem';
 // if (__DEV__) {
 //   NativeModules.DevSettings.setIsDebuggingRemotely(true);
 // }
@@ -541,7 +542,11 @@ render(){
 
         (
           <>
-          <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen>
+          {/* <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen> */}
+          {/* DuplicateItem */}
+          <Stack.Screen name="DuplicateItem" component={DuplicateItem}></Stack.Screen>
+          
+          {/* <Stack.Screen name="SampleView" component={SampleView}></Stack.Screen> */}
           {/* <Stack.Screen name = "LoginForm" component={LoginForm}></Stack.Screen> */}
           </>
         
