@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Text, TouchableOpacity, View, FlatList, StyleSheet} from 'react-native';
 import {getAPiResponse,getData} from './NetworkHandler';
+import { PHOTO_URL, secondViewStyles} from './Common/Constant';
+import BaseReact from '../BaseClassSample/BaseReact';
 
-export default class DuplicateItem extends Component{
+export default class DuplicateItem extends BaseReact {
 
     state = {
         duplicateItems : [],
@@ -11,11 +13,19 @@ export default class DuplicateItem extends Component{
     }
     constructor(props){
         super(props);
+        console.log('constructor');
+
         global.selectedItems = [];
-        getAPiResponse('https://jsonplaceholder.typicode.com/photos')
-        .then((response) => this.setState({response: response}))
+        getAPiResponse(PHOTO_URL)
+        // .then((response) => [...this.state.items, response])
+        .then((response) =>  this.setState({
+            response: response,
+        }))
         .catch(error => console.log(error));
          getData().then(name => console.log("Name ", name));
+    }
+    componentWillMount(){
+        console.log('componentWillMount');
     }
     checkSignIn = () => {
         return new Promise((resolve, reject) => {
@@ -32,8 +42,18 @@ export default class DuplicateItem extends Component{
         
       })
     }
+    componentDidMount(){
+        console.log('componentDidMount');
+    }
+    shouldComponentUpdate(){
+
+        return false
+    }
     render(){
+        super.render()
+        console.log('render');
         return(
+           
             <View style = {{
                 backgroundColor: 'red',
                 justifyContent: 'center',
@@ -41,6 +61,7 @@ export default class DuplicateItem extends Component{
                 flex: 1,
             }}>
                 <Text>DuplicateItem</Text>
+                <Text style ={secondViewStyles.sampleContainer}>HSHSH</Text>
                 <View style={{ height: 500, width: 500, backgroundColor: 'red'}}>
         
          <FlatList style={{
@@ -84,6 +105,7 @@ export default class DuplicateItem extends Component{
          ></FlatList>
         </View>
             </View>
+        
         );
     }
     checkForDuplicate(obj){
@@ -101,6 +123,7 @@ export default class DuplicateItem extends Component{
                 se.push(item)
             })
             global.selectedItems = se;
+
         }
     
 

@@ -1,5 +1,5 @@
  
-
+import {StyleSheet} from 'react-native';
   export const getAPiResponse =  (url) => {
       
   return new Promise((resolve, reject) => {
@@ -15,6 +15,16 @@ export const getData = () =>{
     })
 }
 
+export const firstViewStyles = StyleSheet.create({
+    headerContainer:{
+        backgroundColor:'red'
+    }
+})
+export const secondViewStyles = StyleSheet.create({
+    sampleContainer :{
+        backgroundColor: firstViewStyles.headerContainer.backgroundColor,
+    }
+})
 // checkSignIn = () => {
 //     return new Promise((resolve, reject) => {
 //     // let userId = '';
